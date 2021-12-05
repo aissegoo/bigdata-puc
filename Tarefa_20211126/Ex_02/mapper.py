@@ -15,16 +15,15 @@ class Mapper(object):
         sys.stdout.write(f"{key}{self.sep}{value}\n")
 
     def map(self):
+        cur_line = 1
+
         for line in self:
-            cur_line = 1
-            arr_words = []
+            line.split('\n')
+
             for word in line.split():
                 word = ''.join(e for e in word if e.isalnum()).lower()
-
-                if word not in arr_words:
-                    arr_words.append(word)
-                    self.emit(word, cur_line)
-                    cur_line += 1
+                self.emit(word, cur_line)
+            cur_line += 1
                 
     def __iter__(self):
         for line in self.infile:
